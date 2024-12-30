@@ -62,7 +62,7 @@ function playRound()
     {
         if (computerChoice === "rock")
         {
-            console.log("Seems like draw!");
+            console.log("Seems like a draw!");
         } 
         else if (computerChoice === "paper")    
         {
@@ -84,7 +84,7 @@ function playRound()
         } 
         else if (computerChoice === "paper") 
         {
-            console.log("Seems like draw!");
+            console.log("Seems like a draw!");
         } 
         else 
         {
@@ -106,7 +106,7 @@ function playRound()
         } 
         else 
         {
-            console.log("Seems like draw!");
+            console.log("Seems like a draw!");
         }
     }
 
@@ -130,4 +130,5 @@ function playGame() {
 }
 
 showScore();
-playGame();
+//playRound();
+//playGame();

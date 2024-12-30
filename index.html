@@ -3,11 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <title>Rock Paper Scissors</title>
-    <script src="game.js"></script>
+    <link href="style.css" rel="stylesheet" />
   </head>
 
   <body>
-    <h1>Hello console game</h1>
-    <p>Press F12 and select the console to play the game</p>
+    <div class="game-menu">
+      <textarea class="log-area" readonly></textarea>
+      <div class="control-buttons">
+        <button class="game-button" type="button">Rock</button>
+        <button class="game-button" type="button">Paper</button>
+        <button class="game-button" type="button">Scissors</button>
+      </div>
+    </div>
+
+    <script src="game.js"></script>
   </body>
 </html>
