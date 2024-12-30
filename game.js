@@ -1,5 +1,6 @@
 let humanScore = 0;
 let computerScore = 0;
+let humanChoice = null;
 
 function getComputerChoice() 
 {
@@ -22,57 +23,63 @@ function getComputerChoice()
     return compChoice;
 }
 
-function getHumanChoice() 
+function addEvents()
 {
-    let humanChoice = null;
-    let isValid = false;
+    let contolButtons = document.querySelector(".control-buttons");
+    contolButtons.addEventListener('click', function(event) {
+        let target = event.target.closest("button");
+        if(!target)
+            return;
 
-    while(!isValid) 
-    {
-        humanChoice = prompt("Choose \'rock\' \'paper\' or \'scissors\'", "");
+        humanChoice = target.innerText.toLowerCase();
+    });
 
-        if (humanChoice.toLowerCase() === "rock" || humanChoice.toLowerCase() === "scissors" || humanChoice.toLowerCase() === "paper") 
-        {
-            isValid = true;
-        } 
-        else 
-        {
-            alert("Wrong input! Try again");
-        }
-    }
+    contolButtons.addEventListener('click', function(event) {
+        let target = event.target.closest("button");
+        if(!target)
+            return;
 
-    return humanChoice.toLowerCase();
+        playRound();
+    });
+
+    contolButtons.addEventListener('click', function(event) {
+        let target = event.target.closest("button");
+        if(!target)
+            return;
+
+        checkWinCondition();
+    });
 }
 
-function showScore() {
-    console.log(`Player score: 
+function showScore() 
+{
+    log.value += `Player score: 
         Computer - ${computerScore}
-        Player - ${humanScore}`);
+        Player - ${humanScore}\n\n`;
 }
 
 function playRound() 
 {
     let computerChoice = getComputerChoice();
-    let humanChoice = getHumanChoice();
 
-    console.log(`You chose: ${humanChoice}`);
-    console.log(`Computer chose: ${computerChoice}`);
+    log.value += `You chose: ${humanChoice}\n`;
+    log.value += `Computer chose: ${computerChoice}\n`;
 
     if (humanChoice === "rock") 
     {
         if (computerChoice === "rock")
         {
-            console.log("Seems like a draw!");
+            log.value += "Seems like a draw!\n\n";
         } 
         else if (computerChoice === "paper")    
         {
             ++computerScore;
-            console.log("Paper beats rock! Computer won!");
+            log.value += "Paper beats rock! Computer won!\n\n";
         } 
         else 
         {
             ++humanScore;
-            console.log("Rock beats scissors! Human won");
+            log.value += "Rock beats scissors! Human won\n\n";
         }
     } 
     else if (humanChoice === "paper") 
@@ -80,16 +87,16 @@ function playRound()
         if (computerChoice === "rock")
         {
             ++humanScore;
-            console.log("Paper beats rock! Human won!");
+            log.value += "Paper beats rock! Human won!\n\n";
         } 
         else if (computerChoice === "paper") 
         {
-            console.log("Seems like a draw!");
+            log.value += "Seems like a draw!\n\n";
         } 
         else 
         {
             ++computerScore;
-            console.log("Scissors beat paper! Computer won");
+            log.value += "Scissors beat paper! Computer won!\n\n";
         }
     }
     else 
@@ -97,38 +104,39 @@ function playRound()
         if (computerChoice === "rock")
         {
             ++computerScore;
-            console.log("Rock beats scissors! Computer won!");
+            log.value += "Rock beats scissors! Computer won!\n\n";
         } 
         else if (computerChoice === "paper") 
         {
             ++humanScore;
-            console.log("Scissors beat paper! Human won");
+            log.value += "Scissors beat paper! Human won!\n\n";
         } 
         else 
         {
-            console.log("Seems like a draw!");
+            log.value += "Seems like a draw!\n\n";
         }
     }
 
     showScore();
 }
 
-function playGame() {
-    for (let i = 0; i < 5; ++i)
+function checkWinCondition() {
+    if (computerScore === 5)
     {
-        playRound();
+        log.value += "The winner is - Computer! \n\nTry again!!!\n\n";
+        humanScore = 0;
+        computerScore = 0;
+        showScore();
     }
 
-    if (humanScore > computerScore)
+    if (humanScore === 5)
     {
-        console.log("Congrats! You won!");
-    }
-    else 
-    {
-        console.log("Sad but true! Computer won!");
+        log.value += "The winner is - Human! \n\nTry again!!!\n\n";
+        humanScore = 0;
+        computerScore = 0;
+        showScore();
     }
 }
 
 showScore();
-//playRound();
-//playGame();
+addEvents();
